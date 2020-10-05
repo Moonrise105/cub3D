@@ -1,4 +1,7 @@
-SRCS			= main.c get_next_line.c parser.c bmp.c
+SRCS			= main.c get_next_line.c parser.c bmp.c parse_map.c parse_line.c \
+				utils_00.c utils_01.c sort.c walls.c sprites.c floor.c \
+				set.c
+				
 OBJS			= $(SRCS:.c=.o)
 LIBFT			= libft
 CC				= gcc

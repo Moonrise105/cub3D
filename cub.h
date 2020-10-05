@@ -5,6 +5,8 @@
 # include "./mlx/mlx.h"
 # include "./libft/libft.h"
 # include <errno.h>
+# include <math.h> 
+
 # define MAX_WIDTH 2560
 # define MAX_HEIGHT 1440
 # define COLOR_ERROR -2
@@ -80,6 +82,7 @@ typedef struct	s_ray
 	t_ipos		step;
 	double		wall_x;
 	char		world_side;
+	int			line_h;
 }				t_ray;
 
 typedef struct s_img
@@ -98,13 +101,13 @@ typedef struct s_mlx
 	void *mlx_ptr;
 	void *win;
 	t_img img;
-	t_img *texture_SO;
-	t_img *texture_WE;
-	t_img *texture_EA;
-	t_img *texture_NO;
-	t_img *texture_sprite;
-	t_img *texture_floor;
-	t_img *texture_ceil;
+	t_img *tex_SO;
+	t_img *tex_WE;
+	t_img *tex_EA;
+	t_img *tex_NO;
+	t_img *tex_s;
+	t_img *tex_f;
+	t_img *tex_c;
 	t_player player;
 	t_map *map;
 	double *perp_buff;
@@ -164,16 +167,10 @@ typedef struct	s_settings
 int ft_max(int a, int b);
 void	print_error(int code);
 int		ft_mini_atoi(char **str);
-int		parse_path(char **path, char *line);
-int		parse_res(int *res_x, int *res_y, char *line);
-int		parse_color(t_color_rgb *color, char *line);
-int		check_id(char *id, t_settings *settings, char *line);
 int		check_line(char *line, t_settings *settings);
 int		get_max_line_size(t_list *head);
 void	mem_set_char(char **ptr, char c, int size);
 int		is_valid_map_symbol(char c);
-int		check_map(t_settings *settings);
-int		make_map(t_list *head, t_settings *settings);
 void	del_str(void *ptr);
 void	array2D_clear(char **array, int width, int height);
 int		parse_map(int fd, char *line, t_settings *settings);
@@ -185,4 +182,17 @@ int		check_format(char *file, char *format);
 void	parser_free(t_settings *settings);
 void	ft_free(void *ptr);
 int		bitmap(t_mlx *mlx);
+int 	draw_sprites(t_mlx *mlx, t_sprite *sprites, int num_sprites);
+void 	draw_walls(t_mlx *mlx);
+void	draw_floor(t_mlx *mlx, t_ipos *range);
+void	dda_alg(t_mlx *mlx, t_ray *ray);
+int  sort_sprites(t_sprite *sprites, int l, int r);
+int		set_texture(t_mlx *mlx, t_img *texture, char *path);
+int		set_textures(t_settings *settings, t_mlx *mlx);
+void	get_plane(char c, t_fpos *plane, double pov);
+void	get_direction(char c, t_fpos *dir);
+int		set_settings(t_settings *settings, t_mlx *mlx);
+
+
+int		count_sprites(t_mlx *mlx);
 #endif
