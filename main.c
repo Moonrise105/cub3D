@@ -513,13 +513,13 @@ int		set_settings(t_settings *settings, t_mlx *mlx)
 
 	code = 0;
 	mlx->texture_ceil = malloc(sizeof(t_img));
-	mlx->texture_floor = malloc(sizeof(t_img));
+	if (settings->floor_tex_path)
+		mlx->texture_floor = malloc(sizeof(t_img));
 	mlx->texture_NO = malloc(sizeof(t_img));
 	mlx->texture_SO = malloc(sizeof(t_img));
 	mlx->texture_WE = malloc(sizeof(t_img));
 	mlx->texture_EA = malloc(sizeof(t_img));
 	mlx->texture_sprite = malloc(sizeof(t_img));
-
 	if ((code = set_textures(settings, mlx)) < 0)
 		return (code);
 	mlx->player.pos.x = (double)settings->player.pos.x;
@@ -535,7 +535,6 @@ int		set_settings(t_settings *settings, t_mlx *mlx)
 		mlx->img.height = MAX_HEIGHT;
 	else
 		mlx->img.height = settings->resolution_y;
-	
 	mlx->ceil = &settings->color_ceil;
 	mlx->floor = &settings->color_floor;
 	mlx->num_sprites = count_sprites(mlx);
@@ -577,7 +576,8 @@ int		draw(t_mlx *mlx)
 	mlx->perp_buff = malloc(sizeof(double) * mlx->img.width);
 
 	clear_screen(mlx);
-	draw_floor(mlx, &range);
+	if (mlx->texture_floor != NULL)
+		draw_floor(mlx, &range);
 	draw_walls(mlx);
 	draw_sprites(mlx, mlx->sprites, mlx->num_sprites);
 	
@@ -655,21 +655,6 @@ void	start_game(t_mlx *mlx, int save)
 	mlx_loop(mlx->mlx_ptr);
 }
 
-int		cube(t_mlx *mlx, t_settings *settings)
-{
-	
-	if (parser(settings) < 0)
-	{
-		parser_free(settings);
-		return (-1);
-	}
-	if (canvas_init(mlx, settings) < 0)
-		return (-1);
-	
-	start_game(mlx, settings->save);
-	return (0);
-}
-
 void	mlx_free(t_mlx *mlx)
 {
 	ft_free(&mlx->texture_SO);
@@ -683,6 +668,41 @@ void	mlx_free(t_mlx *mlx)
 	ft_free(mlx->perp_buff);
 }
 
+int		cube(t_mlx *mlx, t_settings *settings)
+{
+	
+	if (parser(settings) < 0)
+	{
+		parser_free(settings);
+		return (-1);
+	}
+	if (canvas_init(mlx, settings) < 0)
+		return (-1);
+	
+	start_game(mlx, settings->save);
+	parser_free(settings);
+	mlx_free(mlx);
+	return (0);
+}
+
+
+void	mlx_struct_init(t_mlx *mlx)
+{
+	mlx->ceil = NULL;
+	mlx->texture_floor = NULL;
+	mlx->floor = NULL;
+	mlx->mlx_ptr = NULL;
+	mlx->texture_ceil = NULL;
+	mlx->texture_EA = NULL;
+	mlx->texture_NO = NULL;
+	mlx->texture_SO = NULL;
+	mlx->texture_sprite = NULL;
+	mlx->texture_WE = NULL;
+	mlx->map = NULL;
+	mlx->perp_buff = NULL;
+	mlx->sprites = NULL;
+	mlx->num_sprites = 0;
+}
 
 
 int		cube_init(char *file, int save)
@@ -691,13 +711,14 @@ int		cube_init(char *file, int save)
 	t_settings *settings;
 
 	settings = (t_settings *)malloc(sizeof(t_settings));
+	mlx_struct_init(&mlx);
 	init_settings(settings);
 	settings->file = file;
 	settings->save = save;
 	//mlx = malloc(sizeof(t_mlx));
 	cube(&mlx, settings);
-	parser_free(settings);
-	mlx_free(&mlx);
+	
+	
 	return (0);
 }
 

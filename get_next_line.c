@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:38:40 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/02 13:43:13 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/05 15:19:43 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		 ft_free_c(char **p)
 
 int			check_result(int *read_len, char **read_buff, char **n_pos)
 {
-	if (*read_len || ft_strlen(*read_buff) || *n_pos)
+	if ((read_len && *read_len) || ft_strlen(*read_buff) || *n_pos)
 		return (1);
 	else
 	{
@@ -84,6 +84,7 @@ int			get_next_line(int fd, char **line)
 	char		*tmp;
 
 	read_len = 0;
+	//n_pos = NULL;
 	if (fd < 0 || !line || (read(fd, buff, 0)) < 0 || BUFFER_SIZE < 1)
 		return (-1);
 	n_pos = check_read_buff(read_buff, line);

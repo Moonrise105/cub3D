@@ -101,23 +101,23 @@ int		check_id(char *id, t_settings *settings, char *line) //free good
 	if (ft_strncmp(id, "R", 2) == 0)
 		return (parse_res(&settings->resolution_x, &settings->resolution_y, 
 					++line));
-	else if (ft_strncmp(id, "NO", 2) == 0)
+	else if (ft_strncmp(id, "NO", 3) == 0)
 		return (parse_path(&settings->north_tex_path, line += 2));
-	else if (ft_strncmp(id, "SO", 2) == 0)
+	else if (ft_strncmp(id, "SO", 3) == 0)
 		return (parse_path(&settings->south_tex_path, line += 2));
-	else if (ft_strncmp(id, "WE", 2) == 0)
+	else if (ft_strncmp(id, "WE", 3) == 0)
 		return (parse_path(&settings->west_tex_path, line += 2));
-	else if (ft_strncmp(id, "EA", 2) == 0)
+	else if (ft_strncmp(id, "EA", 3) == 0)
 		return (parse_path(&settings->east_tex_path, line += 2));
-	else if (ft_strncmp(id, "FT", 2) == 0)
+	else if (ft_strncmp(id, "FT", 3) == 0)
 		return (parse_path(&settings->floor_tex_path, line += 2));
-	else if (ft_strncmp(id, "CT", 2) == 0)
+	else if (ft_strncmp(id, "CT", 3) == 0)
 		return (parse_path(&settings->ceil_tex_path, line += 2));
-	else if (ft_strncmp(id, "S", 2) == 0)
+	else if (ft_strncmp(id, "S", 3) == 0)
 		return (parse_path(&settings->sprite_path, ++line));
-	else if (ft_strncmp(id, "F", 2) == 0)
+	else if (ft_strncmp(id, "F", 3) == 0)
 		return (parse_color(&settings->color_floor, ++line));
-	else if (ft_strncmp(id, "C", 2) == 0)
+	else if (ft_strncmp(id, "C", 3) == 0)
 		return (parse_color(&settings->color_ceil, ++line));
 	return (ID_ERROR);
 }
@@ -147,7 +147,7 @@ int		check_line(char *line, t_settings *settings) //free good
 		return (i);
 	}
 	
-	return (0);
+	return (ID_ERROR);
 }
 
 int		get_max_line_size(t_list *head) //good
@@ -341,19 +341,21 @@ int		parse_file(t_settings *settings)
 			if (check_settings(settings))
 			{
 				code = parse_map(fd, line, settings);
+				// if (settings->map.height <= 2)
+				// 	code = MAP_ERROR;
 				return (code);
 			}
 			else
 			{
 				code = check_line(line, settings);
-				ft_free(line);
+				//ft_free(line);
 			}
 			if (code < 0)
 			{
 				ft_free(line);
 				return (code);
 			}
-				
+			ft_free(line);	
 		}
 		close(fd);
 	}
@@ -362,6 +364,8 @@ int		parse_file(t_settings *settings)
 		perror("Error\nOpen");
 		return (STANDART_ERROR);
 	}
+	if (!check_settings(settings) || !settings->map.map_ptr)
+		return (MAP_ERROR);
 	
 	return (code);
 }
