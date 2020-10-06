@@ -6,9 +6,10 @@
 # include "./libft/libft.h"
 # include <errno.h>
 # include <math.h> 
-
 # define MAX_WIDTH 2560
 # define MAX_HEIGHT 1440
+# define VELOCITY 0.51
+# define ROTATE 0.2
 # define COLOR_ERROR -2
 # define RESOLUTION_ERROR -1
 # define MAP_ERROR -3
@@ -137,10 +138,6 @@ typedef struct	s_player_map
 		
 }				t_player_map;
 
-
-
-
-
 typedef struct	s_settings
 {
 	int			save;
@@ -172,7 +169,7 @@ int		get_max_line_size(t_list *head);
 void	mem_set_char(char **ptr, char c, int size);
 int		is_valid_map_symbol(char c);
 void	del_str(void *ptr);
-void	array2D_clear(char **array, int width, int height);
+void	array2d_clear(char **array, int width, int height);
 int		parse_map(int fd, char *line, t_settings *settings);
 int		check_settings(t_settings *settings);
 int		parse_file(t_settings *settings);
@@ -186,13 +183,21 @@ int 	draw_sprites(t_mlx *mlx, t_sprite *sprites, int num_sprites);
 void 	draw_walls(t_mlx *mlx);
 void	draw_floor(t_mlx *mlx, t_ipos *range);
 void	dda_alg(t_mlx *mlx, t_ray *ray);
-int  sort_sprites(t_sprite *sprites, int l, int r);
+int 	sort_sprites(t_sprite *sprites, int l, int r);
 int		set_texture(t_mlx *mlx, t_img *texture, char *path);
 int		set_textures(t_settings *settings, t_mlx *mlx);
 void	get_plane(char c, t_fpos *plane, double pov);
 void	get_direction(char c, t_fpos *dir);
 int		set_settings(t_settings *settings, t_mlx *mlx);
-
-
+int		mlx_alloc(t_mlx *mlx, t_settings *settings);
+int		rgb_to_int(t_color_rgb *color_rgb);
+void	mlx_free(t_mlx *mlx);
+void	mlx_struct_init(t_mlx *mlx);
 int		count_sprites(t_mlx *mlx);
+int		draw(t_mlx *mlx);
+int		canvas_init(t_mlx *mlx, t_settings *settings);
+void	start_game(t_mlx *mlx, int save);
+void reset_image(t_mlx *mlx);
+int 	win_close(t_mlx *mlx);
+void				get_ray_delta(t_ray *ray);
 #endif

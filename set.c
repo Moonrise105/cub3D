@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/06 17:27:26 by ctobias           #+#    #+#             */
+/*   Updated: 2020/10/06 17:29:17 by ctobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 int		set_texture(t_mlx *mlx, t_img *texture, char *path)
@@ -11,8 +23,11 @@ int		set_texture(t_mlx *mlx, t_img *texture, char *path)
 		close(fd);
 		texture->img_ptr = mlx_xpm_file_to_image(mlx->mlx_ptr, path,
 										&texture->width, &texture->height);
-		texture->data = (int *)mlx_get_data_addr(texture->img_ptr, &texture->bpp,
-												&texture->size_l, &texture->endian);
+		if (!texture->img_ptr)
+			return (FORMAT_ERROR);
+		texture->data =
+		(int *)mlx_get_data_addr(texture->img_ptr, &texture->bpp,
+								&texture->size_l, &texture->endian);
 	}
 	if (errno)
 	{
@@ -22,12 +37,10 @@ int		set_texture(t_mlx *mlx, t_img *texture, char *path)
 	return (0);
 }
 
-
-
 int		set_textures(t_settings *settings, t_mlx *mlx)
 {
 	int code;
-	
+
 	code = 0;
 	if ((code = set_texture(mlx, mlx->tex_SO, settings->south_tex_path)) < 0)
 		return (code);
@@ -44,7 +57,7 @@ int		set_textures(t_settings *settings, t_mlx *mlx)
 		if ((code = set_texture(mlx, mlx->tex_f, settings->floor_tex_path)) < 0)
 		{
 			return (code);
-		}		
+		}
 	}
 	return (0);
 }
@@ -64,7 +77,7 @@ void	get_plane(char c, t_fpos *plane, double pov)
 	else if (c == 'W')
 	{
 		plane->x = -pov;
-		plane->y = 0.0; 
+		plane->y = 0.0;
 	}
 	else if (c == 'E')
 	{
@@ -74,7 +87,7 @@ void	get_plane(char c, t_fpos *plane, double pov)
 }
 
 void	get_direction(char c, t_fpos *dir)
-{	
+{
 	if (c == 'N')
 	{
 		dir->x = -1.0;
@@ -97,31 +110,8 @@ void	get_direction(char c, t_fpos *dir)
 	}
 }
 
-int		mlx_alloc(t_mlx *mlx, t_settings *settings)
-{
-	if (settings->floor_tex_path)
-	{
-		if (!(mlx->tex_f = malloc(sizeof(t_img))))
-			return (MALLOC_ERROR);
-	}
-	if (!(mlx->tex_NO = malloc(sizeof(t_img))))
-		return (MALLOC_ERROR);
-	if (!(mlx->tex_SO = malloc(sizeof(t_img))))
-		return (MALLOC_ERROR);
-	if (!(mlx->tex_WE = malloc(sizeof(t_img))))
-		return (MALLOC_ERROR);
-	if (!(mlx->tex_EA = malloc(sizeof(t_img))))
-		return (MALLOC_ERROR);
-	if (!(mlx->tex_s = malloc(sizeof(t_img))))
-		return (MALLOC_ERROR);
-	mlx->num_sprites = count_sprites(mlx);
-	if (!(mlx->sprites = malloc(sizeof(t_sprite) * mlx->num_sprites)))
-		return (MALLOC_ERROR);
-	return (0);
-}
-
 int		set_settings(t_settings *settings, t_mlx *mlx)
-{	
+{
 	int code;
 
 	code = 0;

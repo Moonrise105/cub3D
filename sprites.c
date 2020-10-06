@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/06 17:23:45 by ctobias           #+#    #+#             */
+/*   Updated: 2020/10/06 17:26:08 by ctobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
-static void	get_sprites_pos(t_mlx *mlx, t_sprite *sprites)
+static void		get_sprites_pos(t_mlx *mlx, t_sprite *sprites)
 {
 	int i;
 	int j;
@@ -25,7 +37,8 @@ static void	get_sprites_pos(t_mlx *mlx, t_sprite *sprites)
 	}
 }
 
-static int	get_sorted_sprites(t_mlx *mlx, t_sprite *sprites, int num_sprites)
+static int		get_sorted_sprites(t_mlx *mlx, t_sprite *sprites,
+									int num_sprites)
 {
 	int n;
 
@@ -33,22 +46,28 @@ static int	get_sorted_sprites(t_mlx *mlx, t_sprite *sprites, int num_sprites)
 	n = 0;
 	while (n < num_sprites)
 	{
-		sprites[n].dist = (mlx->player.pos.x - (double)sprites[n].x) * 
-		(mlx->player.pos.x - (double)sprites[n].x) + 
-		(mlx->player.pos.y - (double)sprites[n].y) * (mlx->player.pos.y - (double)sprites[n].y);
+		sprites[n].dist = (mlx->player.pos.x - (double)sprites[n].x) *
+		(mlx->player.pos.x - (double)sprites[n].x) +
+		(mlx->player.pos.y - (double)sprites[n].y) *
+		(mlx->player.pos.y - (double)sprites[n].y);
 		++n;
 	}
 	return (sort_sprites(sprites, 0, num_sprites - 1));
 }
 
-static void calculate_vars(t_sprite_vars *sv, t_mlx *mlx, t_sprite *sprites, int n)
+static void		calculate_vars(t_sprite_vars *sv, t_mlx *mlx,
+								t_sprite *sprites, int n)
 {
 	sv->pos.x = sprites[n].x - mlx->player.pos.x;
 	sv->pos.y = sprites[n].y - mlx->player.pos.y;
-	sv->inv_det = 1.0 / (mlx->player.plane.x * mlx->player.dir.y - mlx->player.plane.y * mlx->player.dir.x);
-	sv->transform.x = sv->inv_det * (mlx->player.dir.y * sv->pos.x - mlx->player.dir.x * sv->pos.y);
-	sv->transform.y = sv->inv_det * ((-1) * mlx->player.plane.y * sv->pos.x + mlx->player.plane.x * sv->pos.y);
-	sv->screen_x = (int)((mlx->img.width / 2) * (1 + sv->transform.x / sv->transform.y));
+	sv->inv_det = 1.0 / (mlx->player.plane.x *
+	mlx->player.dir.y - mlx->player.plane.y * mlx->player.dir.x);
+	sv->transform.x = sv->inv_det *
+	(mlx->player.dir.y * sv->pos.x - mlx->player.dir.x * sv->pos.y);
+	sv->transform.y = sv->inv_det *
+	((-1) * mlx->player.plane.y * sv->pos.x + mlx->player.plane.x * sv->pos.y);
+	sv->screen_x = (int)((mlx->img.width / 2) *
+	(1 + sv->transform.x / sv->transform.y));
 	sv->height = abs((int)(mlx->img.height / sv->transform.y));
 	sv->draw_y.x = -sv->height / 2 + mlx->img.height / 2;
 	if (sv->draw_y.x < 0)
@@ -66,7 +85,7 @@ static void calculate_vars(t_sprite_vars *sv, t_mlx *mlx, t_sprite *sprites, int
 	sv->stripe = sv->draw_x.x;
 }
 
-static void draw_tex_sprites(t_sprite_vars *sv, t_mlx *mlx)
+static void		draw_tex_sprites(t_sprite_vars *sv, t_mlx *mlx)
 {
 	int color;
 	int k;
@@ -90,10 +109,10 @@ static void draw_tex_sprites(t_sprite_vars *sv, t_mlx *mlx)
 	}
 }
 
-int 	draw_sprites(t_mlx *mlx, t_sprite *sprites, int num_sprites)
-{	
-	t_sprite_vars sv;
-	int n;
+int				draw_sprites(t_mlx *mlx, t_sprite *sprites, int num_sprites)
+{
+	t_sprite_vars	sv;
+	int				n;
 
 	if (get_sorted_sprites(mlx, sprites, num_sprites) < 0)
 		return (MALLOC_ERROR);

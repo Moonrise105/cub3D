@@ -11,25 +11,23 @@ int		parse_file(t_settings *settings)
 	char *line;
 	int code;
 
+	errno = 0;
 	fd = open(settings->file, O_RDONLY);
-	if (fd)
-	{
-		while (get_next_line(fd, &line) > 0)
-		{
-			if (check_settings(settings))
-				return (parse_map(fd, line, settings));
-			code = check_line(line, settings);
-			ft_free(line);
-			if (code < 0)
-				return (code);
-		}
-		close(fd);
-	}
 	if (errno)
 	{
 		perror("Error\nOpen");
 		return (STANDART_ERROR);
 	}
+	while (get_next_line(fd, &line) > 0)
+	{
+		if (check_settings(settings))
+			return (parse_map(fd, line, settings));
+		code = check_line(line, settings);
+		ft_free(line);
+		if (code < 0)
+			return (code);
+	}
+	close(fd);
 	if (!check_settings(settings) || !settings->map.map_ptr)
 		return (MAP_ERROR);
 	return (code);

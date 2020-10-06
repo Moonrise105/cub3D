@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/06 17:26:22 by ctobias           #+#    #+#             */
+/*   Updated: 2020/10/06 17:27:15 by ctobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
-static void swap(t_sprite *a, t_sprite *b)
+static void		swap(t_sprite *a, t_sprite *b)
 {
 	t_sprite tmp;
 
@@ -9,7 +21,7 @@ static void swap(t_sprite *a, t_sprite *b)
 	*b = tmp;
 }
 
-static void merge_swap(t_sprite *sprites, t_sprite *tmp, int l, int r)
+static void		merge_swap(t_sprite *sprites, t_sprite *tmp, int l, int r)
 {
 	int i;
 	int j;
@@ -32,12 +44,12 @@ static void merge_swap(t_sprite *sprites, t_sprite *tmp, int l, int r)
 	}
 }
 
-static int merge(t_sprite *sprites, int l, int r, int mid)
+static int		merge(t_sprite *sprites, int l, int r, int mid)
 {
-	int i;
-	int j;
-	int k;
-	t_sprite *tmp;
+	int			i;
+	int			j;
+	int			k;
+	t_sprite	*tmp;
 
 	if (l >= r || mid < l || mid > r)
 		return (0);
@@ -60,7 +72,7 @@ static int merge(t_sprite *sprites, int l, int r, int mid)
 	return (0);
 }
 
-int  sort_sprites(t_sprite *sprites, int l, int r)
+int				sort_sprites(t_sprite *sprites, int l, int r)
 {
 	int mid;
 

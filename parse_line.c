@@ -48,8 +48,6 @@ static int		check_id(char *id, t_settings *settings, char *line)
 		return (parse_path(&settings->east_tex_path, line += 2));
 	else if (ft_strncmp(id, "FT", 3) == 0)
 		return (parse_path(&settings->floor_tex_path, line += 2));
-	else if (ft_strncmp(id, "CT", 3) == 0)
-		return (parse_path(&settings->ceil_tex_path, line += 2));
 	else if (ft_strncmp(id, "S", 3) == 0)
 		return (parse_path(&settings->sprite_path, ++line));
 	else if (ft_strncmp(id, "F", 3) == 0)

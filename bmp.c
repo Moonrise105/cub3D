@@ -35,6 +35,7 @@ void	bdata(int fd, t_mlx *mlx)
 		i -= 2 * mlx->img.width;
 	}
 }
+
 void	bih(int fd, t_mlx *mlx)
 {
 	int				n;
@@ -72,7 +73,7 @@ void	bfh(int fd, t_mlx *mlx)
 	}
 	header[0] = (unsigned char)66;
 	header[1] = (unsigned char)77;
-	n = mlx->map->width * mlx->map->height * 4 + 54 ;
+	n = mlx->map->width * mlx->map->height * 4 + 54;
 	header[2] = (unsigned char)(n % 256);
 	header[3] = (unsigned char)(n / 256 % 256);
 	header[4] = (unsigned char)(n / 256 / 256 % 256);
@@ -87,7 +88,7 @@ int		bitmap(t_mlx *mlx)
 {
 	int fd;
 
-	fd = open("bit.bmp", O_CREAT | O_WRONLY | O_TRUNC);
+	fd = open("screenshot.bmp", O_CREAT | O_WRONLY | O_TRUNC);
 	bfh(fd, mlx);
 	bih(fd, mlx);
 	bdata(fd, mlx);

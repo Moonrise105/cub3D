@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_00.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/06 17:23:17 by ctobias           #+#    #+#             */
+/*   Updated: 2020/10/06 17:23:32 by ctobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 int			ft_max(int a, int b)
@@ -25,7 +37,7 @@ void		print_error(int code)
 	else if (code == RESOLUTION_ERROR)
 		ft_putstr_fd("Resolution parse error\n", 2);
 	else if (code == ID_ERROR)
-	 	ft_putstr_fd("ID parse error\n", 2);
+		ft_putstr_fd("ID parse error\n", 2);
 	else if (code == MALLOC_ERROR)
 		ft_putstr_fd("Malloc error\n", 2);
 	else if (code == MAP_ERROR)
