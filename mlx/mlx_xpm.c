@@ -382,3 +382,4 @@ void	*mlx_xpm_to_image(void *xvar,char **xpm_data,int *width,int *height)
 {
   return (mlx_int_parse_xpm(xvar,xpm_data,0,mlx_int_static_line, width, height));
 }
+

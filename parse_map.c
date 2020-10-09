@@ -1,7 +1,19 @@
-#include "cub.h"
-#include "get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/09 15:50:09 by ctobias           #+#    #+#             */
+/*   Updated: 2020/10/09 15:51:32 by ctobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static	int	check_map_element(t_settings *settings, int i, int j)
+#include "cub.h"
+
+static	int		check_map_element(t_settings *settings,
+									int i, int j)
 {
 	if (i == 0 && settings->map.map_ptr[i][j] != '1')
 		return (MAP_ERROR);
@@ -51,7 +63,8 @@ static int		check_map(t_settings *settings)
 	return (0);
 }
 
-static void fill_line(t_settings *settings, int i, t_list *head)
+static void		fill_line(t_settings *settings, int i,
+							t_list *head)
 {
 	int		j;
 	int		line_size;
@@ -74,13 +87,15 @@ static int		make_map(t_list *head, t_settings *settings)
 	int		i;
 	int		map_width;
 
-	if (!(settings->map.map_ptr = malloc(sizeof(char *) * settings->map.height)))
+	if (!(settings->map.map_ptr = malloc(sizeof(char *) *
+		settings->map.height)))
 		return (MALLOC_ERROR);
 	settings->map.width = get_max_line_size(head);
 	i = 0;
 	while (i < settings->map.height)
 	{
-		if(!(settings->map.map_ptr[i] = malloc(sizeof(char) * settings->map.width)))
+		if (!(settings->map.map_ptr[i] = malloc(sizeof(char) *
+									settings->map.width)))
 		{
 			while (--i >= 0)
 				ft_free(settings->map.map_ptr[i]);
@@ -94,10 +109,10 @@ static int		make_map(t_list *head, t_settings *settings)
 	return (check_map(settings));
 }
 
-int		parse_map(int fd, char *line, t_settings *settings)
+int				parse_map(int fd, char *line, t_settings *settings)
 {
-	t_list *head;
-	int code;
+	t_list		*head;
+	int			code;
 
 	if (ft_strlen(line) == 0)
 		return (MAP_ERROR);

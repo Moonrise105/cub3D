@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/31 17:25:15 by ctobias           #+#    #+#             */
-/*   Updated: 2020/09/30 16:09:30 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/09 16:43:13 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
-
-
 
 char		*ft_strchr(const char *s, int c);
 char		*ft_strjoin(char const *s1, char const *s2);

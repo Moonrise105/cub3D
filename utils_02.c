@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:19:54 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/06 17:20:42 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/09 16:50:53 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ int		mlx_alloc(t_mlx *mlx, t_settings *settings)
 		if (!(mlx->tex_f = malloc(sizeof(t_img))))
 			return (MALLOC_ERROR);
 	}
-	if (!(mlx->tex_NO = malloc(sizeof(t_img))))
+	if (!(mlx->tex_no = malloc(sizeof(t_img))))
 		return (MALLOC_ERROR);
-	if (!(mlx->tex_SO = malloc(sizeof(t_img))))
+	if (!(mlx->tex_so = malloc(sizeof(t_img))))
 		return (MALLOC_ERROR);
-	if (!(mlx->tex_WE = malloc(sizeof(t_img))))
+	if (!(mlx->tex_we = malloc(sizeof(t_img))))
 		return (MALLOC_ERROR);
-	if (!(mlx->tex_EA = malloc(sizeof(t_img))))
+	if (!(mlx->tex_ea = malloc(sizeof(t_img))))
 		return (MALLOC_ERROR);
 	if (!(mlx->tex_s = malloc(sizeof(t_img))))
 		return (MALLOC_ERROR);
@@ -50,14 +50,14 @@ int		rgb_to_int(t_color_rgb *color_rgb)
 
 void	mlx_free(t_mlx *mlx)
 {
-	ft_free(mlx->tex_SO);
-	ft_free(mlx->tex_NO);
-	ft_free(mlx->tex_WE);
-	ft_free(mlx->tex_EA);
+	ft_free(mlx->tex_so);
+	ft_free(mlx->tex_no);
+	ft_free(mlx->tex_we);
+	ft_free(mlx->tex_ea);
 	ft_free(mlx->tex_s);
 	ft_free(mlx->tex_f);
 	ft_free(mlx->sprites);
-	array2D_clear(mlx->map->map_ptr, mlx->map->width, mlx->map->height);
+	array2d_clear(mlx->map->map_ptr, mlx->map->width, mlx->map->height);
 	ft_free(mlx->mlx_ptr);
 }
 
@@ -67,11 +67,11 @@ void	mlx_struct_init(t_mlx *mlx)
 	mlx->tex_f = NULL;
 	mlx->floor = NULL;
 	mlx->mlx_ptr = NULL;
-	mlx->tex_EA = NULL;
-	mlx->tex_NO = NULL;
-	mlx->tex_SO = NULL;
+	mlx->tex_ea = NULL;
+	mlx->tex_no = NULL;
+	mlx->tex_so = NULL;
 	mlx->tex_s = NULL;
-	mlx->tex_WE = NULL;
+	mlx->tex_we = NULL;
 	mlx->map = NULL;
 	mlx->perp_buff = NULL;
 	mlx->sprites = NULL;

@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:07:35 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/06 17:18:39 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/09 16:49:50 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static t_img		*get_texture(t_ray *ray, t_mlx *mlx)
 	t_img *texture;
 
 	if (ray->world_side == 'N')
-		texture = mlx->tex_NO;
+		texture = mlx->tex_no;
 	else if (ray->world_side == 'S')
-		texture = mlx->tex_SO;
+		texture = mlx->tex_so;
 	else if (ray->world_side == 'W')
-		texture = mlx->tex_WE;
+		texture = mlx->tex_we;
 	else if (ray->world_side == 'E')
-		texture = mlx->tex_EA;
+		texture = mlx->tex_ea;
 	return (texture);
 }
 

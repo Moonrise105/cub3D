@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_line.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/09 15:51:44 by ctobias           #+#    #+#             */
+/*   Updated: 2020/10/09 17:14:23 by ctobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 static int			parse_path(char **path, char *line)
@@ -33,31 +45,31 @@ static int			parse_color(t_color_rgb *color, char *line)
 	return (0);
 }
 
-static int		check_id(char *id, t_settings *settings, char *line)
+static int			check_id(char *id, t_settings *settings, char *line)
 {
-	if (ft_strncmp(id, "R", 2) == 0)
-		return (parse_res(&settings->resolution_x, &settings->resolution_y, 
+	if (ft_strncmp(id, "R", 2) == 0 )
+		return (parse_res(&settings->resolution_x, &settings->resolution_y,
 					++line));
-	else if (ft_strncmp(id, "NO", 3) == 0)
+	else if (ft_strncmp(id, "NO", 3) == 0 && !settings->north_tex_path)
 		return (parse_path(&settings->north_tex_path, line += 2));
-	else if (ft_strncmp(id, "SO", 3) == 0)
+	else if (ft_strncmp(id, "SO", 3) == 0 && !settings->south_tex_path)
 		return (parse_path(&settings->south_tex_path, line += 2));
-	else if (ft_strncmp(id, "WE", 3) == 0)
+	else if (ft_strncmp(id, "WE", 3) == 0 && !settings->west_tex_path)
 		return (parse_path(&settings->west_tex_path, line += 2));
-	else if (ft_strncmp(id, "EA", 3) == 0)
+	else if (ft_strncmp(id, "EA", 3) == 0 && !settings->east_tex_path)
 		return (parse_path(&settings->east_tex_path, line += 2));
-	else if (ft_strncmp(id, "FT", 3) == 0)
+	else if (ft_strncmp(id, "FT", 3) == 0 && !settings->floor_tex_path)
 		return (parse_path(&settings->floor_tex_path, line += 2));
-	else if (ft_strncmp(id, "S", 3) == 0)
+	else if (ft_strncmp(id, "S", 3) == 0  && !settings->sprite_path)
 		return (parse_path(&settings->sprite_path, ++line));
-	else if (ft_strncmp(id, "F", 3) == 0)
+	else if (ft_strncmp(id, "F", 3) == 0 && settings->color_floor.r < 0)
 		return (parse_color(&settings->color_floor, ++line));
-	else if (ft_strncmp(id, "C", 3) == 0)
+	else if (ft_strncmp(id, "C", 3) == 0 && settings->color_ceil.r < 0)
 		return (parse_color(&settings->color_ceil, ++line));
 	return (ID_ERROR);
 }
 
-int			check_line(char *line, t_settings *settings)
+int					check_line(char *line, t_settings *settings)
 {
 	int		i;
 	char	*id;
@@ -75,7 +87,7 @@ int			check_line(char *line, t_settings *settings)
 		while (i > 0)
 		{
 			--i;
-			id[i] = line[i]; 
+			id[i] = line[i];
 		}
 		i = check_id(id, settings, line);
 		ft_free(id);

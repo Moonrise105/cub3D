@@ -1,15 +1,22 @@
-#include "libft/libft.h"
-#include "./cub.h"
-#include <fcntl.h>
-#include "./get_next_line.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/09 15:48:48 by ctobias           #+#    #+#             */
+/*   Updated: 2020/10/09 15:49:56 by ctobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdio.h>
+#include "./cub.h"
 
 int		parse_file(t_settings *settings)
 {
-	int fd;
-	char *line;
-	int code;
+	int		fd;
+	char	*line;
+	int		code;
 
 	errno = 0;
 	fd = open(settings->file, O_RDONLY);
@@ -37,7 +44,6 @@ int		parser(t_settings *settings)
 {
 	int code;
 
-	
 	code = parse_file(settings);
 	if (code < 0)
 		print_error(code);
@@ -73,6 +79,7 @@ void	parser_free(t_settings *settings)
 	ft_free(settings->floor_tex_path);
 	ft_free(settings->ceil_tex_path);
 	ft_free(settings->sprite_path);
-	array2D_clear(settings->map.map_ptr, settings->map.width, settings->map.height);
+	array2d_clear(settings->map.map_ptr,
+		settings->map.width, settings->map.height);
 	ft_free(settings);
 }

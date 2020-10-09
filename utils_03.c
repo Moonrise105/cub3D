@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:19:03 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/06 17:19:44 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/09 17:24:24 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,3 +27,4 @@ void				get_ray_delta(t_ray *ray)
 	else
 		ray->delta.y = fabs(1 / ray->dir.y);
 }
+

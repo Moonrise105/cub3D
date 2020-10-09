@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/09 15:54:27 by ctobias           #+#    #+#             */
+/*   Updated: 2020/10/09 15:58:16 by ctobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
 
 void	rotate(t_mlx *mlx, int positive)
@@ -11,12 +23,15 @@ void	rotate(t_mlx *mlx, int positive)
 	else
 		rotate = -ROTATE;
 	old_dir_x = mlx->player.dir.x;
-	mlx->player.dir.x = mlx->player.dir.x * cos(rotate) - mlx->player.dir.y * sin(rotate);
-	mlx->player.dir.y = old_dir_x * sin(rotate) + mlx->player.dir.y * cos(rotate);
+	mlx->player.dir.x = mlx->player.dir.x * cos(rotate) -
+	mlx->player.dir.y * sin(rotate);
+	mlx->player.dir.y = old_dir_x * sin(rotate) +
+	mlx->player.dir.y * cos(rotate);
 	old_plane_x = mlx->player.plane.x;
-	mlx->player.plane.x = mlx->player.plane.x * cos(rotate) - mlx->player.plane.y * sin(rotate);
-	mlx->player.plane.y = old_plane_x * sin(rotate) + mlx->player.plane.y * cos(rotate);
-
+	mlx->player.plane.x = mlx->player.plane.x * cos(rotate) -
+	mlx->player.plane.y * sin(rotate);
+	mlx->player.plane.y = old_plane_x * sin(rotate) +
+	mlx->player.plane.y * cos(rotate);
 }
 
 void	move(t_mlx *mlx, int sign)
@@ -28,6 +43,7 @@ void	move(t_mlx *mlx, int sign)
 		sign * mlx->player.dir.y * VELOCITY)] != '1')
 		mlx->player.pos.y += sign * mlx->player.dir.y * VELOCITY;
 }
+
 int		key(int keycode, t_mlx *mlx)
 {
 	int code;
@@ -65,23 +81,17 @@ void	dda_alg(t_mlx *mlx, t_ray *ray)
 		{
 			ray->side.x += ray->delta.x;
 			ray->map.x += ray->step.x;
-			if (ray->dir.x > 0)
-				ray->world_side = 'S';
-			else
-				ray->world_side = 'N';
+			ray->world_side = (ray->dir.x > 0) ? 'S' : 'N';
 		}
 		else
 		{
 			ray->side.y += ray->delta.y;
 			ray->map.y += ray->step.y;
-			if (ray->dir.y > 0)
-				ray->world_side = 'E';
-			else
-				ray->world_side = 'W';
+			ray->world_side = (ray->dir.y > 0) ? 'E' : 'W';
 		}
 		if (mlx->map->map_ptr[ray->map.x][ray->map.y] == '1')
 			hit = 1;
-	}	
+	}
 }
 
 void	start_game(t_mlx *mlx, int save)

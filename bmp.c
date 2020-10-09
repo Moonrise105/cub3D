@@ -1,16 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bmp.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/09 16:08:57 by ctobias           #+#    #+#             */
+/*   Updated: 2020/10/09 16:52:44 by ctobias          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-typedef struct s_bfh
-{
-	
-} t_bfh;
-
-typedef struct s_bih
-{
-
-} t_bih;
 
 void	bdata(int fd, t_mlx *mlx)
 {
@@ -62,8 +62,8 @@ void	bih(int fd, t_mlx *mlx)
 
 void	bfh(int fd, t_mlx *mlx)
 {
-	int n;
-	unsigned char header[14];
+	int				n;
+	unsigned char	header[14];
 
 	n = 0;
 	while (n < 14)
@@ -81,18 +81,16 @@ void	bfh(int fd, t_mlx *mlx)
 	header[10] = (unsigned char)(54);
 	write(fd, header, 14);
 	header[2] = n % 2;
-
 }
 
 int		bitmap(t_mlx *mlx)
 {
 	int fd;
 
-	fd = open("screenshot.bmp", O_CREAT | O_WRONLY | O_TRUNC);
+	fd = open("screenshot.bmp", O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
 	bfh(fd, mlx);
 	bih(fd, mlx);
 	bdata(fd, mlx);
 	close(fd);
-	
 	return (0);
 }

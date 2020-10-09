@@ -538,4 +538,3 @@ fragment float4 basic_fragment_function(VertexOut vIn [[ stage_in ]], texture2d<
     return vIn.color*texture.sample(textureSampler, vIn.UV);
 }
 """
-

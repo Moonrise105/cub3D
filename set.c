@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:27:26 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/06 17:29:17 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/09 16:50:08 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int		set_textures(t_settings *settings, t_mlx *mlx)
 	int code;
 
 	code = 0;
-	if ((code = set_texture(mlx, mlx->tex_SO, settings->south_tex_path)) < 0)
+	if ((code = set_texture(mlx, mlx->tex_so, settings->south_tex_path)) < 0)
 		return (code);
-	if ((code = set_texture(mlx, mlx->tex_WE, settings->west_tex_path)) < 0)
+	if ((code = set_texture(mlx, mlx->tex_we, settings->west_tex_path)) < 0)
 		return (code);
-	if ((code = set_texture(mlx, mlx->tex_NO, settings->north_tex_path)) < 0)
+	if ((code = set_texture(mlx, mlx->tex_no, settings->north_tex_path)) < 0)
 		return (code);
-	if ((code = set_texture(mlx, mlx->tex_EA, settings->east_tex_path)) < 0)
+	if ((code = set_texture(mlx, mlx->tex_ea, settings->east_tex_path)) < 0)
 		return (code);
 	if ((code = set_texture(mlx, mlx->tex_s, settings->sprite_path)) < 0)
 		return (code);

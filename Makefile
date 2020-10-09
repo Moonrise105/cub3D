@@ -32,6 +32,7 @@ clean:
 fclean:			clean
 				$(RM) $(NAME) $(MLX)
 				$(MAKE) -C $(LIBFT) fclean
+				$(RM) libft.a
 
 re:				fclean $(NAME)
 
