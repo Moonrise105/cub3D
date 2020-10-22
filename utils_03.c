@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:19:03 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/09 17:24:24 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:24:14 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,3 +28,12 @@ void				get_ray_delta(t_ray *ray)
 		ray->delta.y = fabs(1 / ray->dir.y);
 }
 
+void				skip_n(char **line, int fd)
+{
+	if (ft_strlen(*line) == 0)
+	{
+		ft_free(*line);
+		while (get_next_line(fd, line) > 0 && ft_strlen(*line) == 0)
+			ft_free(*line);
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:21:18 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/06 17:23:06 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:11:16 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int			is_valid_map_symbol(char c)
 	return (0);
 }
 
-void		array2d_clear(char **array, int width, int height)
+void		array2d_clear(char **array, int height)
 {
 	int i;
 

@@ -7,7 +7,7 @@ LIBFT			= libft
 CC				= gcc
 RM				= rm -f
 # CFLAGS			= -O3 -Wall -Wextra -Werror -I.
-CFLAGS			= -g -O3 -I.
+CFLAGS			= -g -O3 -Wall -Wextra -Werror -I.
 LIBS			= -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 MLX				= libmlx.dylib
 

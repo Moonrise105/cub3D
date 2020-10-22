@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 15:59:14 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/09 17:17:15 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:09:43 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,21 @@ int		main(int ac, char **av)
 	int save;
 
 	save = 0;
-	if (ac > 1)
+	if ((ac < 2 || ac > 3) || !check_format(av[1], ".cub"))
 	{
-		if (!check_format(av[1], ".cub"))
-		{
-			print_error(FORMAT_ERROR);
-			return (FORMAT_ERROR);
-		}
-		if (ac > 2 && ft_strncmp(av[2], "--save", 6) == 0)
-			save = 1;
-		cube_init(av[1], save);
+		print_error(ARG_ERROR);
+		return (ARG_ERROR);
 	}
+	if (ac == 3)
+	{
+		if (ft_strncmp(av[2], "--save", ft_max(ft_strlen(av[2]), 6)) == 0)
+			save = 1;
+		else
+		{
+			print_error(ARG_ERROR);
+			return (ARG_ERROR);
+		}
+	}
+	cube_init(av[1], save);
 	return (0);
 }

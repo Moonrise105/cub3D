@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:07:35 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/09 16:49:50 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:13:19 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static t_img		*get_texture(t_ray *ray, t_mlx *mlx)
 {
 	t_img *texture;
 
+	texture = mlx->tex_no;
 	if (ray->world_side == 'N')
 		texture = mlx->tex_no;
 	else if (ray->world_side == 'S')
@@ -77,8 +78,6 @@ static void			draw_tex_walls(t_ray *ray, t_mlx *mlx, int x, t_ipos draw)
 static void			texture_walls(t_mlx *mlx, t_ray *ray, int x)
 {
 	t_ipos	draw;
-	t_ipos	tex;
-	int		y;
 
 	draw.x = 0;
 	draw.y = 0;
@@ -106,7 +105,6 @@ static void			texture_walls(t_mlx *mlx, t_ray *ray, int x)
 void				draw_walls(t_mlx *mlx)
 {
 	int		x;
-	int		y;
 	t_ray	ray;
 
 	x = 0;

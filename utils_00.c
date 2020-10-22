@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:23:17 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/06 17:23:32 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:00:39 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void		print_error(int code)
 		ft_putstr_fd("Map error\n", 2);
 	else if (code == FORMAT_ERROR)
 		ft_putstr_fd("Format error\n", 2);
+	else if (code == ARG_ERROR)
+		ft_putstr_fd("Arguments error\n", 2);
 	return ;
 }
 

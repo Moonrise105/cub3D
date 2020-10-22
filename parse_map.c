@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 15:50:09 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/09 15:51:32 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:24:50 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static void		fill_line(t_settings *settings, int i,
 static int		make_map(t_list *head, t_settings *settings)
 {
 	int		i;
-	int		map_width;
 
 	if (!(settings->map.map_ptr = malloc(sizeof(char *) *
 		settings->map.height)))
@@ -114,8 +113,7 @@ int				parse_map(int fd, char *line, t_settings *settings)
 	t_list		*head;
 	int			code;
 
-	if (ft_strlen(line) == 0)
-		return (MAP_ERROR);
+	skip_n(&line, fd);
 	head = ft_lstnew(line);
 	if (!head)
 		return (MALLOC_ERROR);

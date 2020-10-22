@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:19:54 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/09 16:50:53 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:13:40 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	mlx_free(t_mlx *mlx)
 	ft_free(mlx->tex_s);
 	ft_free(mlx->tex_f);
 	ft_free(mlx->sprites);
-	array2d_clear(mlx->map->map_ptr, mlx->map->width, mlx->map->height);
+	array2d_clear(mlx->map->map_ptr, mlx->map->height);
 	ft_free(mlx->mlx_ptr);
 }
 

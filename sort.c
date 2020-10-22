@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 17:26:22 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/06 17:27:15 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:12:14 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ static void		merge_swap(t_sprite *sprites, t_sprite *tmp, int l, int r)
 static int		merge(t_sprite *sprites, int l, int r, int mid)
 {
 	int			i;
-	int			j;
-	int			k;
 	t_sprite	*tmp;
 
 	if (l >= r || mid < l || mid > r)

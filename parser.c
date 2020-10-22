@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 15:48:48 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/09 15:49:56 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:11:48 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void	parser_free(t_settings *settings)
 	ft_free(settings->ceil_tex_path);
 	ft_free(settings->sprite_path);
 	array2d_clear(settings->map.map_ptr,
-		settings->map.width, settings->map.height);
+	settings->map.height);
 	ft_free(settings);
 }

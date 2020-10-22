@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:36:39 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/09 16:41:06 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 17:21:51 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define STANDART_ERROR -6
 # define MALLOC_ERROR -5
 # define FORMAT_ERROR -7
+# define ARG_ERROR -8
 
 typedef struct		s_map
 {
@@ -179,7 +180,7 @@ int					get_max_line_size(t_list *head);
 void				mem_set_char(char **ptr, char c, int size);
 int					is_valid_map_symbol(char c);
 void				del_str(void *ptr);
-void				array2d_clear(char **array, int width, int height);
+void				array2d_clear(char **array, int height);
 int					parse_map(int fd, char *line, t_settings *settings);
 int					check_settings(t_settings *settings);
 int					parse_file(t_settings *settings);
@@ -211,4 +212,5 @@ void				start_game(t_mlx *mlx, int save);
 void				reset_image(t_mlx *mlx);
 int					win_close(t_mlx *mlx);
 void				get_ray_delta(t_ray *ray);
+void				skip_n(char **line, int fd);
 #endif

@@ -1,15 +1,33 @@
 R 1280 720
+
+
 NO ./textures/wood.xpm
+
+
 SO ./textures/stone.xpm
+
 WE ./textures/brick.xpm
+
 EA ./textures/metal.xpm
+
+
+
 S ./textures/pillar.xpm
+
+
 FT ./textures/wood.xpm
+
 F 100,220,100
+
+
+
 C 150,150,255
+
+
+
 11111111111111
 10000000200001
-1000E000000001
+1000S000000001
 10000000000001
 10001010000001
 10001010000001
