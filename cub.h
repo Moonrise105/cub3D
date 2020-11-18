@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:36:39 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/22 17:21:51 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 21:28:16 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 # include <stdlib.h>
 # include "./mlx/mlx.h"
 # include "./libft/libft.h"
-# include "./get_next_line.h"
 # include <errno.h>
 # include <math.h>
 # define MAX_WIDTH 2560
 # define MAX_HEIGHT 1440
-# define VELOCITY 0.51
+# define VELOCITY 0.31
 # define ROTATE 0.2
 # define COLOR_ERROR -2
 # define RESOLUTION_ERROR -1
@@ -31,6 +30,7 @@
 # define MALLOC_ERROR -5
 # define FORMAT_ERROR -7
 # define ARG_ERROR -8
+# define BUFFER_SIZE 32
 
 typedef struct		s_map
 {
@@ -213,4 +213,5 @@ void				reset_image(t_mlx *mlx);
 int					win_close(t_mlx *mlx);
 void				get_ray_delta(t_ray *ray);
 void				skip_n(char **line, int fd);
+int					get_next_line(int fd, char **line);
 #endif

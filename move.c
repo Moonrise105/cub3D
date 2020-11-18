@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 15:54:27 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/09 15:58:16 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 21:30:12 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,26 @@ void	rotate(t_mlx *mlx, int positive)
 	mlx->player.plane.y * cos(rotate);
 }
 
-void	move(t_mlx *mlx, int sign)
+void	move(t_mlx *mlx, int sign, int right)
 {
-	if (mlx->map->map_ptr[(int)(mlx->player.pos.x + sign * mlx->player.dir.x *
-		VELOCITY)][(int)mlx->player.pos.y] != '1')
-		mlx->player.pos.x += sign * mlx->player.dir.x * VELOCITY;
-	if (mlx->map->map_ptr[(int)mlx->player.pos.x][(int)(mlx->player.pos.y +
-		sign * mlx->player.dir.y * VELOCITY)] != '1')
-		mlx->player.pos.y += sign * mlx->player.dir.y * VELOCITY;
+	if (sign != 0)
+	{
+		if (mlx->map->map_ptr[(int)(mlx->player.pos.x + sign *
+		mlx->player.dir.x * VELOCITY)][(int)mlx->player.pos.y] != '1')
+			mlx->player.pos.x += sign * mlx->player.dir.x * VELOCITY;
+		if (mlx->map->map_ptr[(int)mlx->player.pos.x][(int)(mlx->player.pos.y +
+			sign * mlx->player.dir.y * VELOCITY)] != '1')
+			mlx->player.pos.y += sign * mlx->player.dir.y * VELOCITY;
+	}
+	else
+	{
+		if (mlx->map->map_ptr[(int)(mlx->player.pos.x + right *
+			mlx->player.dir.y * VELOCITY)][(int)mlx->player.pos.y] != '1')
+			mlx->player.pos.x += right * mlx->player.dir.y * VELOCITY;
+		if (mlx->map->map_ptr[(int)mlx->player.pos.x][(int)(mlx->player.pos.y -
+			right * mlx->player.dir.x * VELOCITY)] != '1')
+			mlx->player.pos.y -= right * mlx->player.dir.x * VELOCITY;
+	}
 }
 
 int		key(int keycode, t_mlx *mlx)
@@ -49,17 +61,19 @@ int		key(int keycode, t_mlx *mlx)
 	int code;
 
 	if (keycode == 53)
-	{
 		win_close(mlx);
-	}
 	else if (keycode == 13)
-		move(mlx, 1);
-	else if (keycode == 0)
+		move(mlx, 1, 0);
+	else if (keycode == 123)
 		rotate(mlx, 1);
 	else if (keycode == 1)
-		move(mlx, -1);
-	else if (keycode == 2)
+		move(mlx, -1, 0);
+	else if (keycode == 124)
 		rotate(mlx, 0);
+	else if (keycode == 2)
+		move(mlx, 0, 1);
+	else if (keycode == 0)
+		move(mlx, 0, -1);
 	reset_image(mlx);
 	code = draw(mlx);
 	if (code < 0)

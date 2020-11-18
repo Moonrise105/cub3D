@@ -6,11 +6,11 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:38:40 by ctobias           #+#    #+#             */
-/*   Updated: 2020/10/09 16:00:23 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/10/22 18:56:13 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./get_next_line.h"
+#include "./cub.h"
 
 void		ft_strclr(char *s)
 {
